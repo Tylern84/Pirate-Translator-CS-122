@@ -1,0 +1,13 @@
+Build the Java project
+
+To test your work: 
+linux> make clean; make run
+
+To run the same autograder that Autolab will use when you submit:
+linux> ./driver.sh
+
+Files:
+README                 This file
+Makefile               Makefile to build/run project
+driver.sh              Script run by Autolab when a project is submitted (uses Makefile)
+*.java                 Java files for this projec

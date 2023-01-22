@@ -1,0 +1,142 @@
+<h1>Problem Set 2: Pirate Translator</h1>
+<h2>Goals</h2>
+<p>In this assignment you'll: (1) create your own class; (2) see how to
+generate new objects and interact with them from code that lives
+outside of the class; (3) get some additional practice using the built
+in features of the Java API -- specifically methods belonging to
+Java's built in String class; (4) learn a pattern to obtain input from
+the keyboard.</p>
+<h2>Set up</h2>
+<p>Begin by launching Eclipse and starting a new Java project for your work.
+In this assignment, your code will consist of two classes:</p>
+<ul>
+<li><code>PirateTranslator</code></li>
+<li><code>SimpleLauncher</code></li>
+</ul>
+<p>The <code>PirateTranslator</code> class will encapsulate the logic to translate
+English sentences into Pirate-speech. The <code>SimpleLauncher</code> class will
+contain the <code>main</code> method and the associated logic that will allow you
+to type in sentences and then have them translated for you.  In this
+assignment, I've written the SimpleLauncher class for you (below), and
+you can simply type it into Eclipse.</p>
+<pre><code>import java.util.Scanner;
+
+public class SimpleLauncher {
+
+    public static void main(String [] args) {
+
+    PirateTranslator translator = new PirateTranslator();
+    Scanner userInput = new Scanner(System.in);
+    String response;
+
+    // userInput.hasNext() will return true until
+    // you type 'Control-D' on a mac, or Control-Z on
+    // a windows machine.  if that happens, we need
+    // to break out of the loop and stop.
+    while(userInput.hasNext()) {
+        System.out.println(translator.translate(userInput.nextLine()));
+
+    }
+    }
+}
+</code></pre>
+<h2>Implementing PirateTranslator</h2>
+<p>Within your Eclipse/IntelliJ project, create a new Class called
+<code>PirateTranslator</code>. This class should have one public method with the
+following signature:</p>
+<p><code>public String translate(String input)</code></p>
+<p>The method should take an input string, and output a version of that
+string that has been translated into Pirate-speech.  For example the
+phrase "hello officer" should be translated as "ahoy foul
+blaggart". Below is a list of normal english words/phrases and their
+Pirate-speech counter parts.</p>
+<p>English phrases:      "hello", "his", "her", "hi", "pardon me", "excuse me",
+             "my", "friend", "sir", "madam",
+             "stranger", "officer",
+             "where", "you", "tell",
+             "know", "how far", "old", "happy", "is"</p>
+<p>Pirate counterparts:  "ahoy", "ye", "ye", "yo-ho-ho", "avast", "arrr",
+             "me", "me bucko", "matey", "proud beauty",
+             "scurvy dog", "foul blaggart",
+             "whar", "ye", "be tellin'",
+             "be knowin'", "how many leagues",
+             "barnacle-covered", "grog-filled", "be"</p>
+<p>Your translate method should accept strings with arbitrary
+capitalization, however, it can return translated strings that are all
+in lower case.</p>
+<p>Once you can successfully translate simple sentences into pirate
+speech, you should add logic to your translate method that attempts to
+detect the sentence's affect. For simplicity, we'll consider three
+possibilities for affect: <em>positive</em>, <em>negative</em>, and <em>none</em>.</p>
+<p>A user response should be considered <em>positive</em> if it contains one of
+the following strings: <code>adore</code>, <code>love</code>, <code>enjoy</code>. A response should be
+considered <em>negative</em> if it contains one of these strings: <code>dislike</code>,
+<code>hate</code>, <code>despise</code>.  If the user response contains neither a <em>negative</em>
+affect string nor a <em>positive</em> affect string, or it if contains both,
+then the affect should be considered <em>none</em>.  When examining the
+user's response for affect, you should ignore case. Thus a user
+response of <code>"I HATE that"</code> should be treated identically to <code>"i hate
+that"</code>. Note that there are no gradations of affect; affect is simply positive, negative, or none.</p>
+<p>For <em>negative</em> affect sentences, you should append
+<code>" 'tis like bein' food for the fish!"</code> to the end of the translation.
+For <em>positive</em> affect
+sentences, you should append <code>" 'tis like me pirate treasure!"</code> to the end
+of the translation.  Thus an input sentence <code>"I adore you"</code> would
+translate to <code>"I adore ye 'tis like me pirate treasure!"</code>.</p>
+<p>Thus, for full credit:</p>
+<ol>
+<li>Translate english phrases into their pirate-speech counterparts</li>
+<li>Translate arbitrary capitalization on input, but return all lower case output</li>
+<li>Detect the affect of input sentences and append metaphor appropriately</li>
+</ol>
+<h2>Example Output</h2>
+<p>Below is a sample trace from my program when I run
+<code>SimpleLauncher</code>. Translations are in italics.</p>
+<p><code>&gt; hello</code></p>
+<p><em>ahoy</em></p>
+<p><code>&gt; hello friend</code></p>
+<p><em>ahoy me bucko</em></p>
+<p><code>&gt; I adore you</code></p>
+<p><em>i adore ye 'tis like me pirate treasure!</em></p>
+<p><code>&gt; I hate you</code></p>
+<p><em>i hate ye 'tis like bein' food for the fish!</em></p>
+<p><code>&gt; where is my old boat?</code></p>
+<p><em>whar be me barnacle-covered boat?</em></p>
+<p><code>&gt; pardon me sir, do you know where my old boat is?</code></p>
+<p><em>avast matey, do ye be knowin' whar me barnacle-covered boat be?</em></p>
+<h2>Testing Your Code</h2>
+<p>You can test your code interactively by running the
+SimpleLauncher. You should also submit to Autolab.  Currently, our
+Autolab implementation will check:</p>
+<ol>
+<li>If your translator works on the sentences in this description</li>
+<li>If your translator works on a few other simple sentences</li>
+<li>If your translator correctly applies affect</li>
+<li>If your translator can handle input sentences with arbitrary capitalization </li>
+</ol>
+<p>Don't forget you can submit to Autolab as many times as you like prior
+to the assignment's due date.  When you submit to Autolab you only
+need to submit the <code>PirateTranslator.java</code> file.</p>
+<h2>Hints</h2>
+<p>Recall the String methods we covered in class.  These will be helpful in this assignment.  Also, take a look at the Java documentation on the String class (google 'java string'). Note that you can send a String to a method that asks for a CharSequence --- that means that you can call the method <code>replace("cheese", "tofu")</code> to replace the substring "cheese" with the substring "tofu". You can get a lot of mileage out of the <code>replace</code> and <code>contains</code> methods in this assignment.</p>
+<h2>Beyond the Basics</h2>
+<p>For 0-7 points of extra credit, consider adding one or more of the following features:</p>
+<ol>
+<li>
+<p>(1 pts, easy) If the same string is given to the translate method twice in a row, instead of providing a translation the second time, respond with "I be a translator, not a puppet!", instead of an actual translation.</p>
+</li>
+<li>
+<p>(2 points, harder) Add new translations for the english words  "i", and "my" to "me", and "me" respectively. Be sure to translate "my old boat is faster than his shiny new boat" correctly.</p>
+</li>
+<li>
+<p>(4 points, hardish) Sometimes direct translation will put multiple "me" strings in a row, which is not really pirate-like. (e.g., translating 'my friend' into 'me me bucko'). Make your translator remove such redundant me substrings while still preserving those that exist in the original input text (i.e., 'my friend' should translate to 'me bucko' while 'me me me' should still translate to 'me me me'). To make this simpler, you can assume that all inputs use a single space to separate words.</p>
+</li>
+</ol>
+<h2>Turning it in</h2>
+<p>Turn in the final version of your <code>PirateTranslator.java</code> file via Autolab.</p>
+<h2>Scoring</h2>
+<ul>
+<li>21 Points will be ascribed to Autolab testing</li>
+<li>9 Points will be ascribed to readability and code quality</li>
+<li>Up to 7 additional points may be earned</li>
+</ul>
