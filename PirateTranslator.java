@@ -16,6 +16,8 @@ public class PirateTranslator {
 
     String[] lastTranslations = new String[25];
     int s = 0;
+//    creating a varibale to store orginal string
+    String orginInput;
 
     /**
      * _Part 1: Implement this method_
@@ -26,9 +28,16 @@ public class PirateTranslator {
         // TODO: implement this
         //transform input into all lower case
         input = input.toLowerCase();
-        String orginInput = input;
         boolean hasPositive = false;
         boolean hasNegative = false;
+
+        //checking if input was the same as the previous input
+        if(input.equals(orginInput)){
+            return "I be a translator, not a puppet!";
+        }
+        else{
+            orginInput=input;
+        }
 
         //Translate Input
         for (int i = 0; i < 20; i++) {
@@ -49,7 +58,7 @@ public class PirateTranslator {
             }
         }
 
-        //appending strings (if necessarry)
+        //appending strings (if necessary)
         if(hasPositive && hasNegative){
             input= input;
         } else if (hasPositive) {
